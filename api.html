@@ -27,17 +27,18 @@
             class="border p-2 rounded w-60" type="text"
             onkeyup="searchIssues()">
         </div>
+        <!-- scarch btn -->
         <div>
-            <button class="bg-[#4A00FF] p-2 text-white rounded">+ New Issue</button>
+            <button class="bg-[#4A00FF] p-2 text-white rounded transition active:scale-95">+ New Issue</button>
         </div>
     </div>
-     </header>
+     </header>  
 
      <!-- All open closed -->
       <div class="flex w-8/10 mx-auto border border-[#E4E4E7] shadow-lg p-4 rounded mt-15">
-        <button class="pl-8 pr-8 pt-1 pb-1 bg-[#4A00FF] text-white rounded mr-2">All</button>
-        <button class="pl-8 pr-8 pt-1 pb-1  text-[#64748B] border border-[#E4E4E7] rounded mr-2">Open</button>
-        <button class="pl-8 pr-8 pt-1 pb-1  text-[#64748B] border border-[#E4E4E7] rounded">Closed</button>
+        <button class="pl-8 pr-8 pt-1 pb-1 bg-[#4A00FF] text-white rounded mr-2 transition active:scale-95">All</button>
+        <button class="pl-8 pr-8 pt-1 pb-1  text-[#64748B] border border-[#E4E4E7] rounded mr-2 transition active:scale-95">Open</button>
+        <button class="pl-8 pr-8 pt-1 pb-1  text-[#64748B] border border-[#E4E4E7] rounded transition active:scale-95">Closed</button>
       </div>
       <!-- issue-tracker -->
  <div class="flex justify-between w-8/10 mx-auto border border-[#E4E4E7] shadow-lg p-4 rounded m-2">
@@ -65,6 +66,12 @@
          </div>
     </div>
  </div>
+
+ <main>
+    <div class="card-con">
+
+    </div>
+ </main>
  <script src="./js/script.js"></script>
 </body>
 </html> 
