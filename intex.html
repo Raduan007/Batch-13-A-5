@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>github</title>
+   <!-- Tailwind and Daisy UI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="./style.css">  
+</head>
+<body>
+    <!-- login section -->
+     <section class="flex flex-col items-center justify-center">
+        <div class="">
+            <div class=" flex items-center justify-center mb-6">
+                <img src="./assets/github-logo.png" alt="">
+            </div>
+           <div class=" items-center flex flex-col">
+                <h1 class="font-semibold text-2xl">GitHub Issues Tracker</h1>
+                <p class="text-[#64748B]">Sign in to manage your issues</p>
+            </div>
+        </div>
+    <!-- input part -->
+     <div>
+        <div>
+            <h4 class="font-medium">Username</h4>
+            <input class=" border border-[#E4E4E7] p-1 w-90  rounded-md" id="username" type="text"  placeholder="Enter Username">
+            <p class="text-[#4A00FF] mb-6">Default: admin</p>
+        </div>
+        <div>
+            <h4 class="font-medium">Password</h4>
+            <input class=" border border-[#E4E4E7] p-1 w-90  rounded-md" id="password" type="text"  placeholder="Enter Password">
+             <p class="text-[#4A00FF] mb-6">Default: admin123</p>
+        </div>
+     </div>
+     <!-- sing in button -->
+       <div> 
+        <button onclick="login()" 
+        class="bg-[#4A00FF] text-white w-90 p-2 rounded-md">Sign In</button>
+
+        <p id="error" class="text-red-500 mt-3"></p>
+    </div>
+    <!-- OR -->
+       <div class="flex items-center w-90 my-6">
+  <div class="h-[1px] bg-[#E4E4E7] w-full"></div>
+  <span class="px-4 ">OR</span>
+   <div class="h-[1px] bg-[#E4E4E7] w-full"></div>
+</div>
+ <!-- Demo password -->
+  <div>
+    <div>
+        <p class="text-[#64748B] mb-8">Demo Credentials:</p>
+    </div>
+    <div class="">
+        <h4> <span class="font-medium">Username:</span> admin</h4>
+        <h4> <span class="font-medium">Password:</span> admin123</h4>
+    </div>
+  </div>
+
+
+     </section>
+    
+
+    <script>
+        function login (){
+    let user = document.getElementById('username').value
+    let pass = document.getElementById('password').value
+    if(user === "admin" && pass === "admin123"){
+       window.location.href = "api.html"
+    }
+    else{
+        document.getElementById("error").innerText = "wrong username or password"
+    }
+
+}
+    </script>
+</body>
+</html>
