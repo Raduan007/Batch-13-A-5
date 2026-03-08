@@ -17,7 +17,7 @@ let allIssues = [];
 let filteredIssues = [];
 let activeTab = "all";
 
-// Icons for each label
+// Icons label
 function getLabelIcon(label) {
   switch ((label || "").toLowerCase()) {
     case "bug": 
@@ -35,7 +35,7 @@ function getLabelIcon(label) {
 
 // Fetch issues
 async function fetchIssues() {
-  try {
+  try {ach
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
     const data = await res.json();
     allIssues = data.data || [];
@@ -63,11 +63,11 @@ function renderIssues(issues) {
     const card = document.createElement("div");
     card.className = "bg-white rounded-xl shadow-md border border-gray-100 cursor-pointer hover:shadow-lg transition";
 
-    // Colored top border for open/closed
+    // Colored top 
     const borderColor = issue.status === "open" ? "#00A96E" : issue.status === "closed" ? "#A855F7" : "transparent";
     card.style.borderTop = `4px solid ${borderColor}`;
 
-    // Labels with icons (smaller badge)
+    // Labels  icons 
     const labelsHTML = (issue.labels || []).map(label =>
       `<span class="px-1.5 py-0.5 text-[9px] font-medium ${getLabelColor(label)} rounded-full flex items-center gap-1">
          <span>${getLabelIcon(label)}</span>${label.toUpperCase()}
@@ -143,7 +143,7 @@ function showModal(issue) {
 
 closeModal.addEventListener("click", () => issueModal.classList.add("hidden"));
 
-// Priority colors
+// Priority 
 function getPriorityColor(priority) {
   switch((priority || "low").toLowerCase()) {
     case "high": return "text-red-600 bg-red-100";
@@ -168,7 +168,7 @@ allBtn.onclick = () => { activeTab="all"; renderIssues(allIssues); setActiveButt
 openBtn.onclick = () => { activeTab="open"; renderIssues(allIssues.filter(i => i.status==="open")); setActiveButton(openBtn); };
 closedBtn.onclick = () => { activeTab="closed"; renderIssues(allIssues.filter(i => i.status==="closed")); setActiveButton(closedBtn); };
 
-// Active button styling
+// Active button
 function setActiveButton(activeBtn){
   [allBtn, openBtn, closedBtn].forEach(btn=>{
     btn.classList.remove("bg-[#4A00FF]","text-white");
@@ -176,6 +176,5 @@ function setActiveButton(activeBtn){
   });
   activeBtn.classList.add("bg-[#4A00FF]","text-white");
 }
-
-// Initialize
+ 
 fetchIssues();
