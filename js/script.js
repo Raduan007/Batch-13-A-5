@@ -25,9 +25,9 @@ function getLabelIcon(label) {
     case "enhancement": 
       return `<img src="./assets/Sparkle.png" class="w-3 h-3" alt="enhancement">`;
     case "documentation": 
-      return `📄`;
+      return `<img src="./assets/readme-brands-solid-full.svg" alt="" class="w-3 h-3">`;
     case "help wanted": 
-      return `❓`;
+      return `<img src="./assets/circle-question-solid-full.svg" alt="" class="w-3 h-3">`;
     default:     
       return `<img src="./assets/Lifebuoy.png" class="w-3 h-3" alt="default">`;
   }

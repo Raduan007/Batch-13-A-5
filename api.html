@@ -22,11 +22,14 @@
       <div class="w-9 h-9">
         <img src="./assets/github-logo.png" alt="GitHub Logo">
       </div>
-      <h2 class="font-semibold">GitHub Issues Tracker</h2>
+      <h2 class="font-semibold hidden sm:block">GitHub Issues Tracker</h2>
     </div>
     <div class="flex gap-4">
       <input id="searchInput" placeholder="Search issues..." class="border p-2 rounded w-60" type="text">
-      <button id="searchBtn" class="bg-[#4A00FF] p-2 text-white rounded transition active:scale-95">+ New Issue</button>
+      <button id="searchBtn" class="bg-[#4A00FF] p-2 text-white rounded transition active:scale-95 flex items-center gap-1 ">
+        <span><img class=" w-5 h-5" src="./assets/search.svg" alt=""></span>
+        <span class="hidden sm:block mb-0.5">Search</span>
+      </button>
     </div>
   </header>  
 
@@ -45,7 +48,7 @@
         <img src="./assets/Aperture.png" alt="Aperture">
         <div>
           <h3 id="issueCount">50 Issues</h3>
-          <p>Track and manage your project issues</p>
+          <p class="hidden sm:block">Track and manage your project issues</p>
         </div>
       </div>
       <div class="flex gap-3">
