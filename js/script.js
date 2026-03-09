@@ -82,7 +82,7 @@ function renderIssues(issues) {
       </div>
       <div class="flex justify-between text-xs p-3 text-[#64748B]">
         <span>Assignee: ${issue.assignee || "None"}</span>
-        <span>${issue.dueDate ? new Date(issue.dueDate).toLocaleDateString() : "-"}</span>
+        <span>${issue.updatedAt ? new Date(issue.updatedAt).toLocaleDateString() : "-"}</span>
       </div>
     `;
 
@@ -140,7 +140,7 @@ function showModal(issue) {
   ${issue.description}
 </p>
 
-<div class="grid grid-cols-2 gap-4 pt-3 border-t">
+<div class="grid grid-cols-2 gap-4 p-3 border- bg-[#F8FAFC]">
   <div>
     <p class="text-sm text-gray-500">Assignee:</p>
     <p class="font-semibold">${issue.assignee || "None"}</p>
@@ -155,7 +155,7 @@ function showModal(issue) {
 </div>
 
 <div class="flex justify-end mt-6">
-  <button id="closeModalBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+  <button id="closeModalBtn" class="bg-[#4A00FF] text-white px-4 py-2 rounded transition active:scale-95 ">
     Close
   </button>
 </div>
