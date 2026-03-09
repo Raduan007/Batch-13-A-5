@@ -91,26 +91,27 @@ function renderIssues(issues) {
   });
 }
 
-// Search
-function searchIssues() {
-  const query = searchInput.value.toLowerCase();
-  let issuesToSearch;
-  if(activeTab === "all") issuesToSearch = allIssues;
-  else if(activeTab === "open") issuesToSearch = allIssues.filter(i => i.status === "open");
-  else if(activeTab === "closed") issuesToSearch = allIssues.filter(i => i.status === "closed");
-
-  filteredIssues = issuesToSearch.filter(issue =>
-    issue.title.toLowerCase().includes(query) ||
-    issue.description.toLowerCase().includes(query) ||
-    issue.author.toLowerCase().includes(query) ||
-    (issue.assignee && issue.assignee.toLowerCase().includes(query))
-  );
-
-  renderIssues(filteredIssues);
+// Search API
+async function searchIssues() {
+  const query = searchInput.value.trim();
+  if (!query) {
+    renderIssues(allIssues);
+    return;
+  }
+  try {
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${encodeURIComponent(query)}`);
+    const data = await res.json();
+    const results = data.data || [];
+    renderIssues(results);
+  } catch (error) {
+    issuesContainer.innerHTML = `<p class="text-red-500">Search failed.</p>`;
+    console.error(error);
+  }
 }
 
 searchBtn.addEventListener("click", searchIssues);
 searchInput.addEventListener("keyup", (e) => { if(e.key === "Enter") searchIssues(); });
+
 
 // Modal
 function showModal(issue) {
@@ -202,5 +203,5 @@ function setActiveButton(activeBtn){
   });
   activeBtn.classList.add("bg-[#4A00FF]","text-white");
 }
-
+  
 fetchIssues();

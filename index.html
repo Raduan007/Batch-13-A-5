@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="./style.css">  
 </head>
-<body>
+<body class="w-[80%] mx-auto">
     <!-- login section -->
      <section class="flex flex-col items-center justify-center">
         <div class="">
@@ -28,18 +28,18 @@
         <div>
             <h4 class="font-medium">Username</h4>
             <input class=" border border-[#E4E4E7] p-1 w-90  rounded-md" id="username" type="text"  placeholder="Enter Username">
-            <p class="text-[#4A00FF] mb-6">Default: admin</p>
+ 
         </div>
         <div>
             <h4 class="font-medium">Password</h4>
             <input class=" border border-[#E4E4E7] p-1 w-90  rounded-md" id="password" type="text"  placeholder="Enter Password">
-             <p class="text-[#4A00FF] mb-6">Default: admin123</p>
+           
         </div>
      </div>
      <!-- sing in button -->
        <div> 
         <button onclick="login()" 
-         class="bg-[#4A00FF] text-white w-90 p-2 rounded-md transition active:scale-95">Sign In</button>
+         class="bg-[#4A00FF] text-white mt-4 w-90 p-2 rounded-md transition active:scale-95">Sign In</button>
         
 
         <p id="error" class="text-red-500 mt-3"></p>
