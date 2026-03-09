@@ -7,7 +7,6 @@ const searchBtn = document.getElementById("searchBtn");
 
 const issueModal = document.getElementById("issueModal");
 const modalContent = document.getElementById("modalContent");
-const closeModal = document.getElementById("closeModal");
 
 const issueCount = document.getElementById("issueCount");
 const openCountEl = document.getElementById("openCount");
@@ -52,9 +51,6 @@ async function fetchIssues() {
 function renderIssues(issues) {
   issuesContainer.innerHTML = "";
 
-  const openIssues = issues.filter(i => i.status === "open").length;
-  const closedIssues = issues.filter(i => i.status === "closed").length;
-
   issueCount.textContent = `${issues.length} Issues`;
   openCountEl.textContent = `Open`;
   closedCountEl.textContent = `Closed`;
@@ -63,11 +59,9 @@ function renderIssues(issues) {
     const card = document.createElement("div");
     card.className = "bg-white rounded-xl shadow-md border border-gray-100 cursor-pointer hover:shadow-lg transition";
 
-    // Colored top 
     const borderColor = issue.status === "open" ? "#00A96E" : issue.status === "closed" ? "#A855F7" : "transparent";
     card.style.borderTop = `4px solid ${borderColor}`;
 
-    // Labels  icons 
     const labelsHTML = (issue.labels || []).map(label =>
       `<span class="px-1.5 py-0.5 text-[9px] font-medium ${getLabelColor(label)} rounded-full flex items-center gap-1">
          <span>${getLabelIcon(label)}</span>${label.toUpperCase()}
@@ -127,21 +121,53 @@ function showModal(issue) {
   ).join(" ");
 
   modalContent.innerHTML = `
-    <h2 class="text-2xl font-bold mb-3">${issue.title}</h2>
-    <p class="text-gray-700 mb-3">${issue.description}</p>
-    <div class="flex gap-1 mb-3">${labelsHTML}</div>
-    <p><strong>Priority:</strong> ${issue.priority}</p>
-    <p><strong>Status:</strong> ${issue.status}</p>
-    <p><strong>Author:</strong> ${issue.author}</p>
-    <p><strong>Assignee:</strong> ${issue.assignee || "None"}</p>
-    <p><strong>Created:</strong> ${new Date(issue.createdAt).toLocaleDateString()}</p>
-    <p><strong>Due:</strong> ${issue.dueDate ? new Date(issue.dueDate).toLocaleDateString() : "-"}</p>
+ <h2 class="text-2xl font-bold mb-2">${issue.title}</h2>
+
+<div class="flex items-center gap-2 text-sm text-gray-500 mb-3">
+  <span class="px-2 py-0.5 text-xs rounded-full ${issue.status === "open" ? "bg-green-100 text-green-700" : "bg-purple-100 text-purple-700"}">
+    ${issue.status === "open" ? "Opened" : "Closed"}
+  </span>
+  <span>Opened by ${issue.author}</span>
+  <span>•</span>
+  <span>${new Date(issue.createdAt).toLocaleDateString()}</span>
+</div>
+
+<div class="flex gap-2 mb-3 flex-wrap">
+  ${labelsHTML}
+</div>
+
+<p class="text-gray-700 mb-4">
+  ${issue.description}
+</p>
+
+<div class="grid grid-cols-2 gap-4 pt-3 border-t">
+  <div>
+    <p class="text-sm text-gray-500">Assignee:</p>
+    <p class="font-semibold">${issue.assignee || "None"}</p>
+  </div>
+
+  <div>
+    <p class="text-sm text-gray-500">Priority:</p>
+    <span class="px-2 py-0.5 text-xs rounded-full ${getPriorityColor(issue.priority)}">
+      ${(issue.priority || "LOW").toUpperCase()}
+    </span>
+  </div>
+</div>
+
+<div class="flex justify-end mt-6">
+  <button id="closeModalBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+    Close
+  </button>
+</div>
   `;
 
   issueModal.classList.remove("hidden");
-}
 
-closeModal.addEventListener("click", () => issueModal.classList.add("hidden"));
+  const bottomCloseBtn = document.getElementById("closeModalBtn");
+  bottomCloseBtn.addEventListener("click", () => {
+    issueModal.classList.add("hidden");
+  });
+}
 
 // Priority 
 function getPriorityColor(priority) {
@@ -176,5 +202,5 @@ function setActiveButton(activeBtn){
   });
   activeBtn.classList.add("bg-[#4A00FF]","text-white");
 }
- 
+
 fetchIssues();
