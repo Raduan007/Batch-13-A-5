@@ -95,13 +95,19 @@ function renderIssues(issues) {
 async function searchIssues() {
   const query = searchInput.value.trim();
   if (!query) {
-    renderIssues(allIssues);
+    if(activeTab === "all") renderIssues(allIssues);
+    if(activeTab === "open") renderIssues(allIssues.filter(i => i.status==="open"));
+    if(activeTab === "closed") renderIssues(allIssues.filter(i => i.status==="closed"));
     return;
   }
   try {
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${encodeURIComponent(query)}`);
     const data = await res.json();
-    const results = data.data || [];
+    let results = data.data || [];
+
+    if(activeTab === "open") results = results.filter(i => i.status === "open");
+    if(activeTab === "closed") results = results.filter(i => i.status === "closed");
+
     renderIssues(results);
   } catch (error) {
     issuesContainer.innerHTML = `<p class="text-red-500">Search failed.</p>`;
@@ -111,7 +117,6 @@ async function searchIssues() {
 
 searchBtn.addEventListener("click", searchIssues);
 searchInput.addEventListener("keyup", (e) => { if(e.key === "Enter") searchIssues(); });
-
 
 // Modal
 function showModal(issue) {
@@ -203,5 +208,16 @@ function setActiveButton(activeBtn){
   });
   activeBtn.classList.add("bg-[#4A00FF]","text-white");
 }
-  
+
+const input = document.getElementById("searchInput");
+const icon = document.getElementById("searchIcon");
+
+input.addEventListener("input", () => {
+  if (input.value.length > 0) {
+    icon.classList.add("hidden");
+  } else {
+    icon.classList.remove("hidden");
+  }
+});
+
 fetchIssues();
